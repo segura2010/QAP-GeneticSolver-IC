@@ -61,9 +61,33 @@ class QAP
 				}
 			}
 
-			char buffer[140]; sprintf(buffer, "%dx%d , %dx%d", distances.size(), distances[0].size(), weights.size(), weights[0].size());
+			char buffer[140]; sprintf(buffer, "W: %dx%d , D: %dx%d", distances.size(), distances[0].size(), weights.size(), weights[0].size());
 			string l = buffer;
 			LOG(l);
+		}
+
+		void simpleSolutionInit(vector<int> &solution)
+		{
+			solution = vector<int>();
+			for(int i=0;i<dimension;i++)
+			{
+				solution.push_back(i);
+			}
+		}
+
+		int fitness(const vector<int> &solution)
+		{
+			int f = 0;
+
+			for(int i=0;i<dimension;i++)
+			{
+				for(int j=0;j<dimension;j++)
+				{
+					f += weights[i][j] * distances[ solution[i] ][ solution[j] ];
+				}
+			}
+
+			return f;
 		}
 };
 

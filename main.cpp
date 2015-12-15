@@ -25,4 +25,11 @@ int main(int argc, char * argv[])
 
 	problem.readFile("data/chr15a.dat");
 
+	vector<int> solution;
+	problem.simpleSolutionInit(solution);
+
+	char buffer[140]; sprintf(buffer, "S: %d", solution.size());
+	string l = buffer;
+	LOG(l);
+
 }

@@ -27,6 +27,11 @@ class QAP
 
 	public:
 
+		int getDimension()
+		{
+			return dimension;
+		}
+
 		void readFile(string filename)
 		{
 			fstream file(filename.c_str(), std::ios_base::in);
@@ -39,6 +44,7 @@ class QAP
 			// read problem dimension
 			file >> dimension;
 
+			distances.clear();
 			// read first matrix (distances)
 			for(int i=0;i<dimension;i++)
 			{
@@ -50,6 +56,7 @@ class QAP
 				}
 			}
 
+			weights.clear();
 			// read second matrix (weights)
 			for(int i=0;i<dimension;i++)
 			{

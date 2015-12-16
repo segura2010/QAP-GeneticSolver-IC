@@ -14,4 +14,10 @@ void LOG(string str)
 		cout << "[LOGGER] " << str << endl;
 }
 
+void LOG(char *str)
+{
+	if(LOG_ON)
+		cout << "[LOGGER] " << str << endl;
+}
+
 #endif

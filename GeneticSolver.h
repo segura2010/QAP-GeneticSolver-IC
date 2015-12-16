@@ -22,6 +22,9 @@
 // Random
 #include "random.h"
 
+// Utils
+#include "utils.h"
+
 using namespace std;
 
 
@@ -112,6 +115,42 @@ class GeneticSolver
     		{	// copy the middle of parents on sons
     			son1[i] = population[parent1][i];
     			son2[i] = population[parent2][i];
+    		}
+
+    		// complete the sons with the order of the other parent
+    		int j=0;
+    		bool isCenter = false;
+    		for(int i=0;i<dimension;i++)
+    		{	// for son 1
+    			isCenter = (i>start && i<end);
+    			if( !isCenter )
+    			{
+					while( find(son1.begin(), son1.end(), population[parent2][j]) != son1.end() )
+					{	// search if son1 have these element, if not i will put it on the son
+						// else, i must search the next candidate
+						j++;
+						j = j % dimension;
+					}
+
+					son1[i] = population[parent2][j];
+				}
+    		}
+
+    		j = 0;
+    		for(int i=0;i<dimension;i++)
+    		{	// for son 2
+    			isCenter = (i>start && i<end);
+    			if( !isCenter )
+    			{
+					while( find(son2.begin(), son2.end(), population[parent1][j]) != son2.end() )
+					{	// search if son1 have these element, if not i will put it on the son
+						// else, i must search the next candidate
+						j++;
+						j = j % dimension;
+					}
+
+					son2[i] = population[parent1][j];
+				}
     		}
 
 		}

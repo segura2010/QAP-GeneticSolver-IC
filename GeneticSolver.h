@@ -6,10 +6,6 @@
 #include <stdio.h>
 #include <iostream>
 
-// for random
-#include <stdlib.h> // rand
-#include <time.h> // time
-
 #include <vector>
 #include <algorithm>
 
@@ -38,8 +34,10 @@ class GeneticSolver
 
 		// To save best solution in the population
 		vector<int> bestSolution;
+		int bestSolutionFitness;
 
 		int populationSize;
+		double mutationProb; // probability of mutation
 
 		QAP problem;
 
@@ -94,13 +92,14 @@ class GeneticSolver
 				}
 			}
 
-			bestSolution = population[best];
+			if( bestSolutionFitness > fitness[best] )
+			{
+				bestSolution = population[best];
+				bestSolutionFitness = fitness[best];
+			}
 		}
 
-		void selection()
-		{}
-
-		void crossover_OX(int parent1, int parent2)
+		void crossover_OX(int parent1, int parent2, vector<int> &son1, vector<int> &son2)
 		{	// OX Crossover
 
 			int dimension = problem.getDimension();
@@ -109,7 +108,9 @@ class GeneticSolver
 			int start = random(0, (dimension/2) - 2);
     		int end = random((dimension/2) + 2, dimension-1);
 
-    		vector<int> son1(dimension, -1), son2(dimension, -1);
+    		// reset vectors
+    		son1 = vector<int>(dimension, -1);
+    		son2 = vector<int>(dimension, -1);
 
     		for(int i=start;i<end;i++)
     		{	// copy the middle of parents on sons
@@ -155,15 +156,30 @@ class GeneticSolver
 
 		}
 
+		void mutation(vector<int> &s)
+		{	// Mutation
+			// it is simple, we will mutate the solution with a specific probability
+			// the mutation is to exchange an gen (location) with other
+			double p = Rand();
+
+			if( p<mutationProb )
+			{
+				int gen1 = Randint(0, s.size()-1);
+				int gen2 = Randint(0, s.size()-1);
+
+				int tmp = s[gen1];
+				s[gen1] = s[gen2];
+				s[gen2] = tmp;
+			}
+		} 
+
 	public:
 
-		GeneticSolver(int pSize, string probName)
+		GeneticSolver(int pSize, double pMut, string probName)
 		{	// read the problem and prepare all to solve the problem
 			populationSize = pSize;
+			mutationProb = pMut;
 			problem.readFile(probName);
-
-			// initialize random seed
-			srand(time(NULL));
 		}
 
 		vector< vector<int> > getPopulation()
@@ -181,17 +197,51 @@ class GeneticSolver
 			// Generate first generation and calculate fitness
 			randomInitialization();
 			calculateAllFitness();
-
 			saveBestSolution();
+
+			vector< vector<int> > newPopulation;
 
 			for(int g=0;g<generations;g++)
 			{
-				// selection
+				// Schema:
+					// selection
+					// cross
+					// mutation
 
-				// cross
-				crossover_OX(0, 1);
+				// Simple selection
+				// choose 2 random solutions and get sons
+				// sons will replace the parents in the population
 
-				// mutation
+				newPopulation.clear();
+
+				while(population.size() > 0)
+				{
+					// selection
+					int parent1 = random(0, population.size()-1);
+					int parent2 = random(0, population.size()-1);
+
+					vector<int> son1, son2;
+
+					// Crossover (to get sons)
+					crossover_OX(parent1, parent2, son1, son2);
+
+					// mutation
+					mutation(son1);
+					mutation(son2);
+
+					// add to new population
+					newPopulation.push_back(son1);
+					newPopulation.push_back(son2);
+
+					// TODO: delete parents from population
+				}
+
+				// update population
+				population = newPopulation;
+
+				// update fitness and best solution
+				calculateAllFitness();
+				saveBestSolution();
 			}
 
 		}

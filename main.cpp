@@ -31,7 +31,7 @@ int main(int argc, char * argv[])
 	cout << "Starting!\n";
 
 	QAP problem;
-	GeneticSolver solver(20, "data/chr15a.dat");
+	GeneticSolver solver(20, 0.2, "data/chr15a.dat");
 
 	solver.solve(10);
 

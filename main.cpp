@@ -28,4 +28,6 @@ int main(int argc, char * argv[])
 	QAP problem;
 	GeneticSolver solver(20, "data/chr15a.dat");
 
+	solver.solve(10);
+
 }

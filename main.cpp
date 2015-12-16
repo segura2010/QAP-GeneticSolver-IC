@@ -15,10 +15,15 @@
 // LOGS
 #include "LOG.h"
 
+// Random
+#include "random.h"
+
 using namespace std;
 
 int main(int argc, char * argv[])
 {
+
+	Seed = 123456;
 
 	char buffer[140];
 	LOG_ON = true;

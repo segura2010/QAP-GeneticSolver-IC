@@ -19,6 +19,9 @@
 // LOGS
 #include "LOG.h"
 
+// Random
+#include "random.h"
+
 using namespace std;
 
 
@@ -65,7 +68,7 @@ class GeneticSolver
 
 		int random(int lower, int upper)
 		{	// generate a random int between (lower, upper)
-			return (rand() % upper + lower);
+			return Randint(lower, upper);
 		}
 
 		void calculateAllFitness()
@@ -93,6 +96,25 @@ class GeneticSolver
 
 		void selection()
 		{}
+
+		void crossover_OX(int parent1, int parent2)
+		{	// OX Crossover
+
+			int dimension = problem.getDimension();
+
+			// generate start and end for the center of the sons
+			int start = random(0, (dimension/2) - 2);
+    		int end = random((dimension/2) + 2, dimension-1);
+
+    		vector<int> son1(dimension, -1), son2(dimension, -1);
+
+    		for(int i=start;i<end;i++)
+    		{	// copy the middle of parents on sons
+    			son1[i] = population[parent1][i];
+    			son2[i] = population[parent2][i];
+    		}
+
+		}
 
 	public:
 
@@ -128,6 +150,7 @@ class GeneticSolver
 				// selection
 
 				// cross
+				crossover_OX(0, 1);
 
 				// mutation
 			}

@@ -40,16 +40,17 @@ int main(int argc, char * argv[])
 	double mutProb = 0.3;
 	GeneticSolver solver(tamPob, mutProb, "data/chr20b.dat");
 
-	solver.lamarckianSolve(1000);
+	solver.lamarckianSolve(10000);
 
 	printSolution( solver.getBestSolution() );
 	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
 
-	LocalSearch ls("data/chr20b.dat");
-	vector<int> s(solver.getBestSolution());
-	int improvedFitness = ls.improveSolution( s );
-
-	printSolution( s );
-	cout << "Fitness: " << improvedFitness << endl;
-
 }
+
+
+
+
+
+
+
+

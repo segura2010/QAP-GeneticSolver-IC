@@ -318,12 +318,12 @@ class GeneticSolver
 
 				newPopulation.clear();
 
+				// baldwinian - pass local search but doesnt use it to generate sons
+				localSearchImprove(improvedPopulation, improvedFitness);
+				saveBestSolution(improvedPopulation, improvedFitness);
+
 				while(population.size() > 0)
 				{
-					// baldwinian - pass local search but doesnt use it to generate sons
-					localSearchImprove(improvedPopulation, improvedFitness);
-					saveBestSolution(improvedPopulation, improvedFitness);
-
 					// selection
 					int parent1 = random(0, population.size()-1);
 					int parent2 = random(0, population.size()-1);
@@ -379,15 +379,14 @@ class GeneticSolver
 
 				newPopulation.clear();
 
+				// lamarckian - pass local search and use it to generate sons
+				localSearchImprove(improvedPopulation, improvedFitness);
+				saveBestSolution(improvedPopulation, improvedFitness);
+				population = vector< vector<int> >(improvedPopulation);
+				fitness = vector<int>(improvedFitness);
+
 				while(population.size() > 0)
 				{
-
-					// lamarckian - pass local search and use it to generate sons
-					localSearchImprove(improvedPopulation, improvedFitness);
-					saveBestSolution(improvedPopulation, improvedFitness);
-					population = vector< vector<int> >(improvedPopulation);
-					fitness = vector<int>(improvedFitness);
-
 					// selection
 					int parent1 = random(0, population.size()-1);
 					int parent2 = random(0, population.size()-1);

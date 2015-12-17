@@ -109,6 +109,24 @@ class GeneticSolver
 			}
 		}
 
+		void saveBestSolution(vector< vector<int> > p, vector<int> f)
+		{	// seach the best solution and save it
+			int best = 0;
+			for(int i=1;i<f.size();i++)
+			{
+				if( f[best] > f[i] )
+				{
+					best = i;
+				}
+			}
+
+			if( bestSolutionFitness > fitness[best] )
+			{
+				bestSolution = p[best];
+				bestSolutionFitness = f[best];
+			}
+		}
+
 		void crossover_OX(int parent1, int parent2, vector<int> &son1, vector<int> &son2)
 		{	// OX Crossover
 
@@ -181,7 +199,20 @@ class GeneticSolver
 				s[gen1] = s[gen2];
 				s[gen2] = tmp;
 			}
-		} 
+		}
+
+		void localSearchImprove(vector< vector<int> > &improvedPopulation, vector<int> &improvedFitness)
+		{	// improve all the population with localsearch (but do not replace it!)
+
+			improvedPopulation = vector< vector<int> >(population);
+			improvedFitness = vector<int>(fitness);
+
+			#pragma omp parallel for
+			for(int i=0;i<improvedPopulation.size();i++)
+			{
+				improvedFitness[i] = LS.improveSolution( improvedPopulation[i] );
+			}
+		}
 
 	public:
 
@@ -190,16 +221,8 @@ class GeneticSolver
 			populationSize = pSize;
 			mutationProb = pMut;
 			problem.readFile(probName);
-		}
 
-		GeneticSolver(int pSize, double pMut, string probName, bool useLS)
-		{	// read the problem and prepare all to solve the problem
-			populationSize = pSize;
-			mutationProb = pMut;
-			problem.readFile(probName);
-
-			if(useLS)
-				LS = LocalSearch(probName);
+			LS = LocalSearch(probName);
 		}
 
 		vector< vector<int> > getPopulation()
@@ -216,7 +239,7 @@ class GeneticSolver
 			return bestSolutionFitness;
 		}
 
-		void solve(int generations)
+		void simpleSolve(int generations)
 		{
 			// Generate first generation and calculate fitness
 			randomInitialization();
@@ -240,6 +263,131 @@ class GeneticSolver
 
 				while(population.size() > 0)
 				{
+					// selection
+					int parent1 = random(0, population.size()-1);
+					int parent2 = random(0, population.size()-1);
+
+					vector<int> son1, son2;
+
+					// Crossover (to get sons)
+					crossover_OX(parent1, parent2, son1, son2);
+
+					// mutation
+					mutation(son1);
+					mutation(son2);
+
+					// add to new population
+					newPopulation.push_back(son1);
+					newPopulation.push_back(son2);
+
+					// delete parents from population
+					population.erase( population.begin()+parent1, population.begin()+parent1+1 );
+					population.erase( population.begin()+parent2, population.begin()+parent2+1 );
+				}
+
+				// update population
+				population = newPopulation;
+
+				// update fitness and best solution
+				calculateAllFitness();
+				saveBestSolution();
+			}
+
+		}
+
+		void baldwinianSolve(int generations)
+		{
+			// Generate first generation and calculate fitness
+			randomInitialization();
+			calculateAllFitness();
+			saveBestSolution();
+
+			vector< vector<int> > newPopulation, improvedPopulation;
+			vector<int> improvedFitness;
+
+			for(int g=0;g<generations;g++)
+			{
+				// Schema:
+					// selection
+					// cross
+					// mutation
+
+				// Simple selection
+				// choose 2 random solutions and get sons
+				// sons will replace the parents in the population
+
+				newPopulation.clear();
+
+				while(population.size() > 0)
+				{
+					// baldwinian - pass local search but doesnt use it to generate sons
+					localSearchImprove(improvedPopulation, improvedFitness);
+					saveBestSolution(improvedPopulation, improvedFitness);
+
+					// selection
+					int parent1 = random(0, population.size()-1);
+					int parent2 = random(0, population.size()-1);
+
+					vector<int> son1, son2;
+
+					// Crossover (to get sons)
+					crossover_OX(parent1, parent2, son1, son2);
+
+					// mutation
+					mutation(son1);
+					mutation(son2);
+
+					// add to new population
+					newPopulation.push_back(son1);
+					newPopulation.push_back(son2);
+
+					// delete parents from population
+					population.erase( population.begin()+parent1, population.begin()+parent1+1 );
+					population.erase( population.begin()+parent2, population.begin()+parent2+1 );
+				}
+
+				// update population
+				population = newPopulation;
+
+				// update fitness and best solution
+				calculateAllFitness();
+				saveBestSolution();
+			}
+
+		}
+
+		void lamarckianSolve(int generations)
+		{
+			// Generate first generation and calculate fitness
+			randomInitialization();
+			calculateAllFitness();
+			saveBestSolution();
+
+			vector< vector<int> > newPopulation, improvedPopulation;
+			vector<int> improvedFitness;
+
+			for(int g=0;g<generations;g++)
+			{
+				// Schema:
+					// selection
+					// cross
+					// mutation
+
+				// Simple selection
+				// choose 2 random solutions and get sons
+				// sons will replace the parents in the population
+
+				newPopulation.clear();
+
+				while(population.size() > 0)
+				{
+
+					// lamarckian - pass local search and use it to generate sons
+					localSearchImprove(improvedPopulation, improvedFitness);
+					saveBestSolution(improvedPopulation, improvedFitness);
+					population = vector< vector<int> >(improvedPopulation);
+					fitness = vector<int>(improvedFitness);
+
 					// selection
 					int parent1 = random(0, population.size()-1);
 					int parent2 = random(0, population.size()-1);

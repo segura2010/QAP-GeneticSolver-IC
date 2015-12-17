@@ -31,13 +31,16 @@ int main(int argc, char * argv[])
 	char buffer[140];
 	LOG_ON = true;
 
+	// Set threads number for parallel code
+	omp_set_num_threads(4);
+
 	cout << "Starting!\n";
 
 	int tamPob = 50;
 	double mutProb = 0.3;
 	GeneticSolver solver(tamPob, mutProb, "data/chr20b.dat");
 
-	solver.solve(10000);
+	solver.baldwinianSolve(100);
 
 	printSolution( solver.getBestSolution() );
 	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;

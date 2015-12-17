@@ -18,6 +18,9 @@
 // Random
 #include "random.h"
 
+// Local search for memetic GA
+#include "LocalSearch.h"
+
 using namespace std;
 
 int main(int argc, char * argv[])
@@ -32,11 +35,18 @@ int main(int argc, char * argv[])
 
 	int tamPob = 50;
 	double mutProb = 0.3;
-	GeneticSolver solver(tamPob, mutProb, "data/chr15a.dat");
+	GeneticSolver solver(tamPob, mutProb, "data/chr20b.dat");
 
-	solver.solve(100000);
+	solver.solve(10000);
 
 	printSolution( solver.getBestSolution() );
 	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
+
+	LocalSearch ls("data/chr20b.dat");
+	vector<int> s(solver.getBestSolution());
+	int improvedFitness = ls.improveSolution( s );
+
+	printSolution( s );
+	cout << "Fitness: " << improvedFitness << endl;
 
 }

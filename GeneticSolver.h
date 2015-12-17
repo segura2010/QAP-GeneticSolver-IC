@@ -21,6 +21,9 @@
 // Utils
 #include "utils.h"
 
+// Local search for memetic GA
+#include "LocalSearch.h"
+
 using namespace std;
 
 
@@ -39,7 +42,11 @@ class GeneticSolver
 		int populationSize;
 		double mutationProb; // probability of mutation
 
+		// Problem
 		QAP problem;
+
+		// LocalSearch to improve solutions (MEMETIC GA)
+		LocalSearch LS;
 
 
 		// FUNCTIONS
@@ -183,6 +190,16 @@ class GeneticSolver
 			populationSize = pSize;
 			mutationProb = pMut;
 			problem.readFile(probName);
+		}
+
+		GeneticSolver(int pSize, double pMut, string probName, bool useLS)
+		{	// read the problem and prepare all to solve the problem
+			populationSize = pSize;
+			mutationProb = pMut;
+			problem.readFile(probName);
+
+			if(useLS)
+				LS = LocalSearch(probName);
 		}
 
 		vector< vector<int> > getPopulation()

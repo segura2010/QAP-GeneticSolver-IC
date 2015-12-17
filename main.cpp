@@ -30,9 +30,13 @@ int main(int argc, char * argv[])
 
 	cout << "Starting!\n";
 
-	QAP problem;
-	GeneticSolver solver(20, 0.2, "data/chr15a.dat");
+	int tamPob = 50;
+	double mutProb = 0.3;
+	GeneticSolver solver(tamPob, mutProb, "data/chr15a.dat");
 
-	solver.solve(10);
+	solver.solve(100000);
+
+	printSolution( solver.getBestSolution() );
+	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
 
 }

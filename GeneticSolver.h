@@ -65,6 +65,9 @@ class GeneticSolver
 					population[i].push_back(r);
 				}
 			}
+
+			bestSolution = *(population.end()-1);
+			bestSolutionFitness = problem.fitness( *(population.end()-1) );
 		}
 
 		int random(int lower, int upper)
@@ -191,6 +194,10 @@ class GeneticSolver
 		{	// getter
 			return bestSolution;
 		}
+		int getBestSolutionFitness()
+		{	// getter
+			return bestSolutionFitness;
+		}
 
 		void solve(int generations)
 		{
@@ -233,7 +240,9 @@ class GeneticSolver
 					newPopulation.push_back(son1);
 					newPopulation.push_back(son2);
 
-					// TODO: delete parents from population
+					// delete parents from population
+					population.erase( population.begin()+parent1, population.begin()+parent1+1 );
+					population.erase( population.begin()+parent2, population.begin()+parent2+1 );
 				}
 
 				// update population

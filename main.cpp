@@ -40,7 +40,7 @@ int main(int argc, char * argv[])
 	double mutProb = 0.3;
 	GeneticSolver solver(tamPob, mutProb, "data/chr20b.dat");
 
-	solver.baldwinianSolve(100);
+	solver.lamarckianSolve(1000);
 
 	printSolution( solver.getBestSolution() );
 	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;

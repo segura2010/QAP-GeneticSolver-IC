@@ -201,7 +201,7 @@ class GeneticSolver
 			}
 		}
 
-		void localSearchImprove(vector< vector<int> > &improvedPopulation, vector<int> &improvedFitness)
+		void localSearchImprove(vector< vector<int> > &improvedPopulation, vector<int> &improvedFitness, int maxEvalLocal)
 		{	// improve all the population with localsearch (but do not replace it!)
 
 			improvedPopulation = vector< vector<int> >(population);
@@ -210,7 +210,7 @@ class GeneticSolver
 			#pragma omp parallel for
 			for(int i=0;i<improvedPopulation.size();i++)
 			{
-				improvedFitness[i] = LS.improveSolution( improvedPopulation[i] );
+				improvedFitness[i] = LS.improveSolution( improvedPopulation[i], maxEvalLocal );
 			}
 		}
 
@@ -295,7 +295,7 @@ class GeneticSolver
 
 		}
 
-		void baldwinianSolve(int generations)
+		void baldwinianSolve(int generations, int maxEvalLocal)
 		{
 			// Generate first generation and calculate fitness
 			randomInitialization();
@@ -319,7 +319,7 @@ class GeneticSolver
 				newPopulation.clear();
 
 				// baldwinian - pass local search but doesnt use it to generate sons
-				localSearchImprove(improvedPopulation, improvedFitness);
+				localSearchImprove(improvedPopulation, improvedFitness, maxEvalLocal);
 				saveBestSolution(improvedPopulation, improvedFitness);
 
 				while(population.size() > 0)
@@ -356,7 +356,7 @@ class GeneticSolver
 
 		}
 
-		void lamarckianSolve(int generations)
+		void lamarckianSolve(int generations, int maxEvalLocal)
 		{
 			// Generate first generation and calculate fitness
 			randomInitialization();
@@ -380,7 +380,7 @@ class GeneticSolver
 				newPopulation.clear();
 
 				// lamarckian - pass local search and use it to generate sons
-				localSearchImprove(improvedPopulation, improvedFitness);
+				localSearchImprove(improvedPopulation, improvedFitness, maxEvalLocal);
 				saveBestSolution(improvedPopulation, improvedFitness);
 				population = vector< vector<int> >(improvedPopulation);
 				fitness = vector<int>(improvedFitness);

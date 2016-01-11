@@ -142,7 +142,7 @@ Una vez que conocemos nuestro problema, vamos a ver los algoritmos propuestos pa
 
 En esta sección se describen las diferentes variantes de algoritmos genéticos propuestos e implementados para resolver el problema de la asignación cuadrática. En primer lugar se describe la representación de la solución y los operadores básicos, ya que son comunes a todas las implementaciones. Y finalmente se describen brevemente los algoritmos concretos.
 
-\subsection{Operadores}
+\subsection{Representación de la solución}
 
 La representación de la solución es sencilla y una de las más usadas para el QAP. Se hace uso de una representación en forma de permutación. Un vector de valores enteros en el que la posición del vector indica la localización y el contenido de esa posición representa el instalación que ocupará esa localización.
 
@@ -172,6 +172,17 @@ Para la selección de individuos a cruzar, se ha elegido un operador de selección
 El operador de mutación implementado muta los dos hijos generados a partir de los padres con el operador de cruce. De forma aleatoria se elige si se mutará cada uno de los hijos con una probabilidad de mutación. La probabilidad de mutación es un parámetro de nuestros algoritmos, así que puede modificarse para tratar de mejorar las soluciones.
 \\\\
 La mutación que se aplica a los individuos consiste en un intercambio de genes. Se eligen aleatoriamente dos genes, y se intercambian. En nuestro problema, se eligen aleatoriamente dos localizaciones, y se intercambian las instalaciones asignadas a dichas localizaciones.
+
+\subsection{Técnica de Optimización Local}
+
+Para las variantes baldwiniana y lamarckiana del algoritmo genético, se ha optado por utilizar una \textbf{búsqueda local} que permita optimizar al máximo las soluciones de nuestra población, hasta llegar a un mínimo local. La búsqueda local que se ha implementado recibe una solución y la optimiza buscando el primer vecino mejor que ésta. Es decir, en cuanto obtenemos un vecino mejor que nuestra solución actual, "nos movemos" al vecino e iniciamos una nueva búsqueda local sobre la nueva solución, buscando el primer vecino a esta nueva solución que sea mejor. Si recorremos todo el vecindario y no se ha encontrado ningún vecino mejor, se acaba la búsqueda y devuelve el mejor encontrado. La condición de parada es no encontrar ningún vecino mejor que la solución actual (estamos estancados en un mínimo local), o superar el número de evaluaciones máximo (es un parámetro).
+
+
+\subsubsection{Operador de Vecino}
+
+El operador de vecino nos indica como nos movemos por el vecindario de una solución, y por tanto, cual es el vecindario de la misma.
+\\
+El operador de vecino utilizado es el mismo que el operador genético, consiste en intercambiar dos instalaciones de diferentes localizaciones. En lugar de elegir dos localizaciones aleatoriamente, en la búsqueda local se intercambian todas con todas. El vecindario para una solución esta formado por todas las soluciones que podemos obtener intercambiando todas las instalaciones de localización. Si después de probar todas las combinaciones no hemos encontrado una solución vecina mejor o superamos el máximo de evaluaciones, tendremos que finalizar la búsqueda local.
 
 
 \section{Conclusiones}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.4)  11 JAN 2016 15:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.4)  11 JAN 2016 19:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -570,7 +570,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 153--158
 
  []
 
-[3] <img/crossover_ox.png, id=71, 259.97125pt x 72.27pt>
+[3] <img/crossover_ox.png, id=81, 259.97125pt x 72.27pt>
 File: img/crossover_ox.png Graphic file (type png)
 
 <use img/crossover_ox.png>
@@ -581,35 +581,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 172--175
 
  []
 
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 180.
+[4 <./img/crossover_ox.png>]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 191.
+
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 178--181
+Underfull \hbox (badness 10000) in paragraph at lines 189--192
 
  []
 
 
 AED: lastpage setting LastPage
-[4 <./img/crossover_ox.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 190.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 190.
+[5]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 201.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 201.
  (./plantilla.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 190.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 190.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 201.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 201.
 Package rerunfilecheck Info: File `plantilla.out' has not changed.
-(rerunfilecheck)             Checksum: DCFEDECF8CB7876246D346D78CEF2EE0;515.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 190.
+(rerunfilecheck)             Checksum: 7CF37B2242A9B7BC4A9975A3D00079D5;702.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 201.
  ) 
 Here is how much of TeX's memory you used:
- 7580 strings out of 493089
- 111215 string characters out of 6134843
- 303574 words of memory out of 5000000
- 10963 multiletter control sequences out of 15000+600000
+ 7585 strings out of 493089
+ 111291 string characters out of 6134843
+ 304574 words of memory out of 5000000
+ 10965 multiletter control sequences out of 15000+600000
  9063 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,12n,43p,753b,324s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,12n,43p,910b,324s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
 xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/tex
@@ -620,10 +622,10 @@ ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive
 015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/201
 5/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015
 /texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on plantilla.pdf (4 pages, 113343 bytes).
+Output written on plantilla.pdf (5 pages, 118556 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
- 99 compressed objects within 1 object stream
- 16 named destinations out of 1000 (max. 500000)
- 70 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 134 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
+ 19 named destinations out of 1000 (max. 500000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 

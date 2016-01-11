@@ -41,11 +41,12 @@ class LocalSearch
 			problem.readFile(probName);
 		}
 
-		int improveSolution(vector<int> &s)
+		int improveSolution(vector<int> &s, int maxEval)
 		{	// Apply local search to the solution to improve it
 
 			bool improved = true;
 			int savedFitness = problem.fitness(s);
+			int evals = 0;
 
 			// while i improve the solution, keep exploring the neighborhood (and trying to improve)
 			while( improved )
@@ -63,6 +64,7 @@ class LocalSearch
 							s[i] = s[j];
 							s[j] = tmp;
 							int f = problem.fitness(s);
+							evals++;
 
 							if(f < savedFitness)
 							{	// it's better, update&move
@@ -73,6 +75,11 @@ class LocalSearch
 							{	// recover the solution
 								s[j] = s[i];
 								s[i] = tmp;
+							}
+
+							if(evals > maxEval)
+							{	// max evaluations! exit!!
+								return savedFitness;
 							}
 						}
 					}

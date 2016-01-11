@@ -41,8 +41,8 @@ int main(int argc, char * argv[])
 	GeneticSolver solver(tamPob, mutProb, "data/chr20b.dat");
 
 	//solver.simpleSolve(1000000);
-	solver.lamarckianSolve(100000);
-	//solver.baldwinianSolve(100000);
+	solver.lamarckianSolve(1000, 1000);
+	//solver.baldwinianSolve(1000, 1000);
 
 	printSolution( solver.getBestSolution() );
 	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;

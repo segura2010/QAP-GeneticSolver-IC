@@ -26,7 +26,7 @@ using namespace std;
 int main(int argc, char * argv[])
 {
 
-	Seed = 123456;
+	Seed = 9123456;
 
 	char buffer[140];
 	LOG_ON = true;
@@ -40,7 +40,9 @@ int main(int argc, char * argv[])
 	double mutProb = 0.3;
 	GeneticSolver solver(tamPob, mutProb, "data/chr20b.dat");
 
-	solver.lamarckianSolve(10000);
+	//solver.simpleSolve(1000000);
+	solver.lamarckianSolve(100000);
+	//solver.baldwinianSolve(100000);
 
 	printSolution( solver.getBestSolution() );
 	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;

@@ -1,0 +1,190 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{hyperref} % Hyperlink
+\usepackage{enumitem}
+
+\usepackage[utf8]{inputenc} % Para tildes!
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\rhead{\hmwkTitle - \hmwkTituloTarea} % Top center head
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Página\ \thepage\ de\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Inteligencia Computacional} % Assignment title
+\newcommand{\hmwkSubtitulo}{Master en Ingeniería Informática} % Due date
+\newcommand{\hmwkDueDate}{Viernes 29 de Enero de 2016} % Due date
+\newcommand{\hmwkTituloTarea}{Práctica 2: Algoritmos Genéticos} % Class/lecture time
+\newcommand{\hmwkAuthorName}{Luis Alberto Segura Delgado} % Your name
+
+% Tabla contenidos nombre
+\renewcommand{\contentsname}{Índice}
+
+% nombre figuras
+\renewcommand{\figurename}{Figura}
+
+% nombre tablas
+\renewcommand{\tablename}{Tabla}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkTitle}}\\
+\textmd{\textbf{\hmwkSubtitulo}}\\
+\normalsize\textbf{\\\hmwkTituloTarea}\\
+\vspace{0.1in}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{\hmwkDueDate} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\inputencoding{latin1}
+\maketitle
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introducción}
+
+En esta práctica el objetivo es familiarizarse y comprender el funcionamiento de los \textbf{algoritmos evolutivos}, en concreto, los \textbf{algoritmos genéticos}. En la siguiente sección se explicarán cada una de las variantes de algoritmos genéticos que se han implementado para la práctica.
+\\
+El problema a resolver es la asociación cuadrática (Quadratic Assignment Problem; QAP). Este problema consiste en asignar una serie de localizaciones a una serie de elementos, en nuestro caso, instalaciones. El objetivo es construir esas instalaciones en los lugares minimicen el coste de transporte de materiales. Entre las instalaciones, una vez construidas, se debe transportar un material determinado, y sabemos el coste llevar dicho material de una instalación a otra según donde se coloque.
+\\\\
+La función de coste (función a minimizar y, por tanto, la función \textit{fitness}) es la siguiente:
+
+\begin{equation}
+	\sum _{ i,j }^{  }{ w(i,j) d( p(i),p(j) ) } 
+\end{equation}
+
+donde p() define una permutación sobre el conjunto de instalaciones (la permutación que representa una la solución al problema). $w(i,j)$ indica el peso (coste) asociado a llevar material de la instalación $i$ a la $j$; y $d(x,y)$ indica la distancia entre las instalaciones $x$ e $y$.
+\\\\
+Una vez que conocemos nuestro problema, vamos a ver los algoritmos propuestos para resolverlo.
+
+
+\section{Implementación}
+
+En esta sección se describen las diferentes variantes de algoritmos genéticos propuestos e implementados para resolver el problema de la asignación cuadrática. En primer lugar se describe la representación de la solución y los operadores básicos, ya que son comunes a todas las implementaciones. Y finalmente se describen brevemente los algoritmos concretos.
+
+\subsection{Operadores}
+
+La representación de la solución es sencilla y una de las más usadas para el QAP. Se hace uso de una representación en forma de permutación. Un vector de valores enteros en el que la posición del vector indica la localización y el contenido de esa posición representa el instalación que ocupará esa localización.
+
+
+\subsection{Operadores}
+
+\subsubsection{Operador de Cruce (OX)}
+El operador de cruce elegido e implementado para nuestros algoritmos ha sido el \textbf{OX}. Existen más operadores de cruce para utilizar, pero me he decantado por este porque parece dar buenos resultados y, personalmente, me gusta más.
+\\\\
+Este operador consiste en cambiar el orden de los padres en los hijos y que hereden la parte central del cromosoma. En primer lugar se elige un rango central de elementos del cromosoma que se mantendrán de los padres a los hijos. El resto de posiciones a los extremos de los hijos se rellenan con la información del otro padre. Para ello, se van rellenando las posiciones de principio a fin en el mismo orden que en el padre. Es decir, si la posición 0 del cromosoma del padre es un 4, se intenta poner en la posición 0 del hijo un 4. En caso de que el 4 ya este en el centro del cromosoma que recibió del otro padre, se salta a la siguiente posición del padre y se pone el siguiente elemento. De esta forma mantenemos el orden.
+\\\\
+Básicamente este operador de cruce permite que los hijos reciban la parte intermedia del cromosoma de uno de los padres, y el orden de los elementos de los extremos del otro padre. En la figura \ref{cruce_ox} podemos ver una representación gráfica de como obtener un hijo a partir de dos padres.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=220px]{img/crossover_ox.png}
+\caption{Operador de Cruce OX \label{cruce_ox}}
+\end{figure}
+
+
+\subsubsection{Operador de Selección}
+
+Para la selección de individuos a cruzar, se ha elegido un operador de selección muy simple. La selección es completamente aleatoria. En cada generación se eligen parejas de padres aleatoriamente y por cada pareja de padres se generan dos hijos que reemplazan a sus padres en la población. Una vez reemplazada toda la población por los nuevos individuos (hijos), se aplica la mutación (si se da el caso) y se vuelve a empezar.
+
+\subsubsection{Operador de Mutación}
+
+El operador de mutación implementado muta los dos hijos generados a partir de los padres con el operador de cruce. De forma aleatoria se elige si se mutará cada uno de los hijos con una probabilidad de mutación. La probabilidad de mutación es un parámetro de nuestros algoritmos, así que puede modificarse para tratar de mejorar las soluciones.
+\\\\
+La mutación que se aplica a los individuos consiste en un intercambio de genes. Se eligen aleatoriamente dos genes, y se intercambian. En nuestro problema, se eligen aleatoriamente dos localizaciones, y se intercambian las instalaciones asignadas a dichas localizaciones.
+
+
+\section{Conclusiones}
+C
+\\\\
+Para concluir, decir que el código y esta documentación estarán disponibles en Github por si son de utilidad para alguien. La dirección es \url{https://github.com/segura2010/QAP-GeneticSolver-IC} y estará disponible pocos días después de la entrega de la práctica.
+
+\iffalse
+Para el formulario:
+
+
+\fi
+
+
+
+\end{document}

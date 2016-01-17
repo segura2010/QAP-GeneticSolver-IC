@@ -185,6 +185,27 @@ El operador de vecino nos indica como nos movemos por el vecindario de una soluc
 El operador de vecino utilizado es el mismo que el operador genético, consiste en intercambiar dos instalaciones de diferentes localizaciones. En lugar de elegir dos localizaciones aleatoriamente, en la búsqueda local se intercambian todas con todas. El vecindario para una solución esta formado por todas las soluciones que podemos obtener intercambiando todas las instalaciones de localización. Si después de probar todas las combinaciones no hemos encontrado una solución vecina mejor o superamos el máximo de evaluaciones, tendremos que finalizar la búsqueda local.
 
 
+\subsection{Algoritmo Genético Estándar}
+
+En primer lugar se ha implementado un algoritmo genético básico, que utiliza los operadores de selección, cruce y mutación explicados anteriormente.
+\\
+Este algoritmo permite, al igual que los dos siguientes, que se indiquen un número de generaciones. El algoritmo acabará después de un número de generaciones especificado.
+
+
+\subsection{Algoritmo Genético variante Baldwiniana}
+
+Esta variante solicitada en la práctica es idéntica a la versión estándar, pero con la diferencia de que se aplica una optimización local (aplicando la búsqueda local explicada anteriormente) a cada generación. La optimización local se aplica una vez obtenida la nueva generación (a partir de los hijos) a todos los individuos. Una vez aplicada, se guarda el mejor individuo obtenido después de la optimización. Las soluciones optimizadas \textbf{no} se usan para generar la siguiente generación.
+
+\subsection{Algoritmo Genético variante Lamarckiana}
+
+Esta variante solicitada en la práctica es idéntica a la versión estándar, pero con la diferencia de que se aplica una optimización local (aplicando la búsqueda local explicada anteriormente) a cada generación. La optimización local se aplica una vez obtenida la nueva generación (a partir de los hijos) a todos los individuos. Una vez aplicada, se guarda el mejor individuo obtenido después de la optimización. Las soluciones optimizadas, en este caso, \textbf{si} se usan para generar la siguiente generación. Ésta es la única diferencia con respecto a la versión Baldwiniana.
+
+
+\section{Resultados}
+
+Ahora que conocemos las diferentes variantes de los algoritmos que hemos utilizado, vamos a comentar los resultados obtenidos para las diferentes versiones del problema QAP.
+
+
 \section{Conclusiones}
 C
 \\\\

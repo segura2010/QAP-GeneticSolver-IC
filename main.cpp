@@ -26,6 +26,12 @@ using namespace std;
 int main(int argc, char * argv[])
 {
 
+	if( argc < 2 )
+	{
+		cout << "Usage: " << argv[0] << " QAP_data_file" << endl;
+		exit(0);
+	}
+
 	Seed = 9123456;
 
 	char buffer[140];
@@ -34,16 +40,24 @@ int main(int argc, char * argv[])
 	// Set threads number for parallel code
 	omp_set_num_threads(4);
 
-	cout << "Starting!\n";
+	cout << "Starting " << argv[1] << " \n";
 
-	int tamPob = 50;
+	int tamPob = 50, generations = 10000;
 	double mutProb = 0.3;
-	GeneticSolver solver(tamPob, mutProb, "data/chr20b.dat");
+	GeneticSolver solver(tamPob, mutProb, argv[1]);
 
-	//solver.simpleSolve(1000000);
-	solver.lamarckianSolve(1000, 1000);
-	//solver.baldwinianSolve(1000, 1000);
+	solver.simpleSolve(generations);
+	cout << "Simple GA: " << endl;
+	printSolution( solver.getBestSolution() );
+	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
 
+	solver.lamarckianSolve(generations, 1000);
+	cout << "Lamarckian GA: " << endl;
+	printSolution( solver.getBestSolution() );
+	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
+
+	solver.baldwinianSolve(generations, 1000);
+	cout << "Baldwinian GA: " << endl;
 	printSolution( solver.getBestSolution() );
 	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
 

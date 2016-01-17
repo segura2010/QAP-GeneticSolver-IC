@@ -7,4 +7,8 @@
 \contentsline {subsubsection}{\numberline {2.2.3}Operador de Mutaci\'on}{4}{subsubsection.2.2.3}
 \contentsline {subsection}{\numberline {2.3}T\'ecnica de Optimizaci\'on Local}{4}{subsection.2.3}
 \contentsline {subsubsection}{\numberline {2.3.1}Operador de Vecino}{4}{subsubsection.2.3.1}
-\contentsline {section}{\numberline {3}Conclusiones}{5}{section.3}
+\contentsline {subsection}{\numberline {2.4}Algoritmo Gen\'etico Est\'andar}{5}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Algoritmo Gen\'etico variante Baldwiniana}{5}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Algoritmo Gen\'etico variante Lamarckiana}{5}{subsection.2.6}
+\contentsline {section}{\numberline {3}Resultados}{5}{section.3}
+\contentsline {section}{\numberline {4}Conclusiones}{5}{section.4}

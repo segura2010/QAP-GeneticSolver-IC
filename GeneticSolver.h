@@ -107,10 +107,11 @@ class GeneticSolver
 				bestSolution = population[best];
 				bestSolutionFitness = fitness[best];
 
-				// Show best solution
+				/* Show best solution
 				cout << "------------ New best solution ------------" << endl;
 				printSolution( bestSolution );
 				cout << "Fitness: " << bestSolutionFitness << endl;
+				*/
 			}
 		}
 

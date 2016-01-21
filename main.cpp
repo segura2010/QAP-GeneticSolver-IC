@@ -35,31 +35,37 @@ int main(int argc, char * argv[])
 	Seed = 9123456;
 
 	char buffer[140];
-	LOG_ON = true;
+	LOG_ON = false;
 
 	// Set threads number for parallel code
 	omp_set_num_threads(4);
 
-	cout << "Starting " << argv[1] << " \n";
+	//cout << "Starting " << argv[1] << " \n";
 
-	int tamPob = 50, generations = 10000;
+	int tamPob = 50, generations = 1000;
 	double mutProb = 0.3;
 	GeneticSolver solver(tamPob, mutProb, argv[1]);
 
 	solver.simpleSolve(generations);
-	cout << "Simple GA: " << endl;
-	printSolution( solver.getBestSolution() );
-	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
+	int simpleSolution = solver.getBestSolutionFitness();
+	//cout << "Simple GA: " << endl;
+	//printSolution( solver.getBestSolution() );
+	//cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
 
-	solver.lamarckianSolve(generations, 1000);
-	cout << "Lamarckian GA: " << endl;
-	printSolution( solver.getBestSolution() );
-	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
 
 	solver.baldwinianSolve(generations, 1000);
-	cout << "Baldwinian GA: " << endl;
-	printSolution( solver.getBestSolution() );
-	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
+	int baldSolution = solver.getBestSolutionFitness();
+	//cout << "Baldwinian GA: " << endl;
+	//printSolution( solver.getBestSolution() );
+	//cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
+
+	solver.lamarckianSolve(generations, 1000);
+	int lamarkSolution = solver.getBestSolutionFitness();
+	//cout << "Lamarckian GA: " << endl;
+	//printSolution( solver.getBestSolution() );
+	//cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
+
+	cout << simpleSolution << " " << baldSolution << " " << lamarkSolution << endl;
 
 }
 

@@ -11,4 +11,4 @@
 \contentsline {subsection}{\numberline {2.5}Algoritmo Gen\'etico variante Baldwiniana}{5}{subsection.2.5}
 \contentsline {subsection}{\numberline {2.6}Algoritmo Gen\'etico variante Lamarckiana}{5}{subsection.2.6}
 \contentsline {section}{\numberline {3}Resultados}{5}{section.3}
-\contentsline {section}{\numberline {4}Conclusiones}{5}{section.4}
+\contentsline {section}{\numberline {4}Conclusiones}{6}{section.4}

@@ -36,6 +36,10 @@
 \usepackage{hyperref} % Hyperlink
 \usepackage{enumitem}
 
+% dat files
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+
 \usepackage[utf8]{inputenc} % Para tildes!
 
 % Margins
@@ -230,7 +234,44 @@ tai60a & 8253832 & 8217080 & 7804916 \\
 \end{tabular}
 \end{table}
 
-En la tabla \ref{resultados_algunas_bd} podemos ver algunos resultados obtenidos al ejecutar nuestras tres variantes de algoritmos genéticos sobre algunas de las bases de datos que se proporcionan en la práctica.
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=1.5]
+\begin{axis}[
+  xlabel=,
+  ylabel=Fitness,
+  legend pos=south east,font=\tiny]
+\addplot table [y=SimpleGA]{../resultados_1000_dat.txt};
+\addlegendentry{Básico}
+\addplot table [y=BaldwinianGA]{../resultados_1000_dat.txt};
+\addlegendentry{Baldwiniano}
+\addplot table [y=LamarckianGA]{../resultados_1000_dat.txt};
+\addlegendentry{Lamarckiano}
+\end{axis}
+\end{tikzpicture}
+\caption{Gráfica resultados de las diferentes versiones}
+\label{grafica:e1}
+\end{figure}
+
+
+En la tabla \ref{resultados_algunas_bd} podemos ver algunos resultados obtenidos al ejecutar nuestras tres variantes de algoritmos genéticos sobre algunas de las bases de datos que se proporcionan en la práctica. Para estos experimentos se han utilizado los mismos parámetros para los tres algoritmos (Ver tabla \ref{parametros:e1}).
+
+\begin{table}[ht!]
+\centering
+\caption{Parámetros algoritmos}
+\label{parametros:e1}
+\begin{tabular}{ c c c c c }
+
+\textbf{Prob Mutación} & \textbf{Tamaño Población} & \textbf{Generaciones} & \textbf{Evaluaciones Busq. Local}  \\ \hline
+
+0.3 & 50 & 1000 & 1000 \\ \hline
+
+\end{tabular}
+\end{table}
+
+Como podemos ver en la tabla \ref{resultados_algunas_bd}, el algoritmo que mejores resultados produce en todos los problemas es la variante Lamarckiana. Después encontramos la versión Baldwiniana y la básica. Estas dos últimas obtienen resultados muy similares entre ellas. Dependiendo del problema una será mejor que la otra, pero son muy similares. En la figura \ref{grafica:e1} podemos ver una gráfica que nos muestra la variación de la función fitness para cada problema. Como vemos, la versión Lamarckiana se encuentra por debajo de los otros dos en todos los problemas. Mientras que las otras dos versiones obtienen prácticamente los mismos resultados (por eso solo se aprecia el resultado de la versión Baldwiniana).
+\\\\
+Una vez realizados estos primeros experimentos, llega el momento de enfrentarse con la base de datos más grande y para la que se piden resultados en la práctica, \textbf{tai256c}.
 
 \section{Conclusiones}
 C

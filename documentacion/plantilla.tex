@@ -204,6 +204,12 @@ Esta variante solicitada en la práctica es idéntica a la versión estándar, pero 
 
 Esta variante solicitada en la práctica es idéntica a la versión estándar, pero con la diferencia de que se aplica una optimización local (aplicando la búsqueda local explicada anteriormente) a cada generación. La optimización local se aplica una vez obtenida la nueva generación (a partir de los hijos) a todos los individuos. Una vez aplicada, se guarda el mejor individuo obtenido después de la optimización. Las soluciones optimizadas, en este caso, \textbf{si} se usan para generar la siguiente generación. Ésta es la única diferencia con respecto a la versión Baldwiniana.
 
+\subsection{Paralelización}
+
+Para las versiones Lamarckiana y Baldwiniana, se ha paralelizado la optimización local. Como se puede ver en el código, se ha paralelizado la sección de código en la que se aplica la búsqueda local a los individuos de la población. De este modo, se aplica la optimización local simultáneamente a varios de ellos, permitiendo que el tiempo necesario para optimizar toda la población sea el menor posible.
+\\\\
+Para paralelizar el código se ha hecho uso de las bibliotecas de OpenMP\footnote{\url{http://openmp.org/}}.
+
 
 \section{Resultados}
 

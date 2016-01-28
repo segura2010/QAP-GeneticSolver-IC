@@ -10,5 +10,6 @@
 \contentsline {subsection}{\numberline {2.4}Algoritmo Gen\'etico Est\'andar}{5}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Algoritmo Gen\'etico variante Baldwiniana}{5}{subsection.2.5}
 \contentsline {subsection}{\numberline {2.6}Algoritmo Gen\'etico variante Lamarckiana}{5}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Paralelizaci\'on}{5}{subsection.2.7}
 \contentsline {section}{\numberline {3}Resultados}{5}{section.3}
-\contentsline {section}{\numberline {4}Conclusiones}{7}{section.4}
+\contentsline {section}{\numberline {4}Conclusiones}{8}{section.4}

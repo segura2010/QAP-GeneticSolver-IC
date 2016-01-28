@@ -162,7 +162,7 @@ Básicamente este operador de cruce permite que los hijos reciban la parte interm
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=220px]{img/crossover_ox.png}
+\includegraphics[width=220px]{img/crossover_ox.jpg}
 \caption{Operador de Cruce OX \label{cruce_ox}}
 \end{figure}
 
@@ -272,15 +272,60 @@ En la tabla \ref{resultados_algunas_bd} podemos ver algunos resultados obtenidos
 Como podemos ver en la tabla \ref{resultados_algunas_bd}, el algoritmo que mejores resultados produce en todos los problemas es la variante Lamarckiana. Después encontramos la versión Baldwiniana y la básica. Estas dos últimas obtienen resultados muy similares entre ellas. Dependiendo del problema una será mejor que la otra, pero son muy similares. En la figura \ref{grafica:e1} podemos ver una gráfica que nos muestra la variación de la función fitness para cada problema. Como vemos, la versión Lamarckiana se encuentra por debajo de los otros dos en todos los problemas. Mientras que las otras dos versiones obtienen prácticamente los mismos resultados (por eso solo se aprecia el resultado de la versión Baldwiniana).
 \\\\
 Una vez realizados estos primeros experimentos, llega el momento de enfrentarse con la base de datos más grande y para la que se piden resultados en la práctica, \textbf{tai256c}.
+\\
+Los resultados obtenidos para la base de datos tai256c por el algoritmo básico y la versión Baldwiniana son muy similares, y en general mayores a 46800000. Por ello, me he centrado principalmente en aprovechar el tiempo que tenía para ejecutar los algoritmos con la versión Lamarckiana, que para las bases de datos más pequeñas y para los experimentos de prueba sobre tai256c obtenía mejores resultados.
+\\\\
+En una primera ejecución con probabilidad de mutación ($P_{mut}$) de 0.7 y con un límite de evaluaciones de la función objetivo para la búsqueda local de 1000 se ha obtenido un resultado de 46758324. Después de este, fui cambiando estos parámetros para ajustarlos lo mejor posible y obtener el mejor resultado posible. En busca de explotar más las soluciones, decidí aumentar el número de evaluaciones de la búsqueda local y realicé un nuevo experimento con $P_{mut}$ = 0.7 y evaluaciones de búsqueda local ($E_{BL}$) igual a 400000; obteniendo como resultado una mejora mayor. Ahora el resultado era de 45349714. Traté de ajustar mejor estos parámetros, pero los siguientes resultados no mejoraron mucho más la solución. La tabla \ref{} muestra algunos de los experimentos más interesantes que realicé para tratar de mejorar el resultado.
+
+\begin{table}[ht!]
+\centering
+\caption{Resultados GA Lamarckiano sobre tai256c}
+\label{resultados_algunas_bd}
+\begin{tabular}{ c c | c }
+\textbf{$E_{BL}$} & \textbf{$P_{mut}$} & \textbf{Resultado}  \\ \hline
+
+0.7 & 1000 & 46758324 \\
+0.7 & 400000 & 45349714 \\
+0.3 & 200000 & 45295516 \\
+0.3 & 50000 & 45256750 \\
+0.7 & 100000 & 45214822 \\\hline
+
+\end{tabular}
+\end{table}
+
+Como podemos ver, el mejor resultado es el que se obtiene con $E_{BL}$ = 0.7 y $P_{mut}$ = 100000. En todo momento traté de buscar una buena relación entre exploración y explotación. Como sabemos, los algoritmos genéticos permiten explotar razonablemente bien el espacio de soluciones, sin embargo, les suele faltar ese toque de explotación que les permita sacar todo el provecho posible a las soluciones que van encontrando. El objetivo de aplicar una optimización local (en nuestro caso con una búsqueda local) es dotar a nuestro algoritmos genético de esa explotación de soluciones que le falta. Por ello, he ido probando diferentes valores para estos dos parámetros, pues permiten controlar el nivel de exploración y explotación. La probabilidad de mutación nos permite aumentar la exploración, sin embargo, $E_{BL}$ nos permite indicar si queremos que se exploten más o menos las soluciones que obtenemos. La idea es ajustarlos de forma que haya una buena exploración y explotación. Cuando subimos $E_{BL}$, trato de subir un poco $P_{mut}$, de forma que al mismo tiempo que aumento la optimización que nos brinda la búsqueda local, también siga permitiendo que haya diversidad en la población de soluciones y no se estanque (o se estanque lo mínimo posible). El número de generaciones no se indica en la tabla, pero en todas las ejecuciones para tai256, se han fijado a un número alto (100000000000000) de forma que la condición real de parada era el tiempo.
+\\\\
+Se podrían haber realizado otras combinaciones, pero el tiempo de ejecución es relativamente alto y no se pueden probar demasiadas. Sin embargo, los resultados obtenidos no son del todo malos comparados con la mejor solución encontrada hasta ahora (44759294), aunque hay una importante diferencia.
+
+
+\end{tabular}
+\end{table}
+
 
 \section{Conclusiones}
-C
+
+En este trabajo hemos implementado tres versiones de algoritmos genéticos, una básica, y dos de ellas nos permitían introducir una optimización local a las soluciones. Por un lado hemos implementado la versión Baldwiniana, que introduce una búsqueda local solamente para optimizar la población y quedarse con la mejor, pero no transmite estas mejoras a los hijos. Por otro lado, se ha implementado una versión Lamarckiana, que también introduce una optimización local para los individuos de la población, pero en este caso, las mejoras aprendidas si que se transmiten a las nuevas generaciones.
+\\\\
+Las técnicas desarrolladas y aplicadas al problema del QAP, son metaheurísticas, que nos permiten obtener soluciones razonablemente buenas, pero no óptimas, en un periodo de tiempo de ejecución razonablemente bajo. Estás técnicas son útiles cuando el espacio de búsqueda de nuestro problema es demasiado grande para aplicar técnicas que obtienen soluciones óptimas (A* por ejemplo), ya que llevaría demasiado tiempo explorar todo el espacio de búsqueda y dar dicha solución.
+\\\\
+Como hemos visto en la sección anterior, la variante que ha obtenido los mejores resultados ha sido la Lamarckiana, mientras que el GA básico y la variante Baldwiniana obtenían resultados muy similares.
+\\\\
+En nuestro caso, los algoritmos implementados son versiones básicas y simples, de forma que los resultados obtenidos no son del todo buenos. Para obtener unos resultados mejores hubiese sido necesario un mayor tiempo para ajustar los diferentes parámetros, añadir algunas ideas interesantes que permitan obtener mejores resultados, probar diferentes operadores de cruce y selección, etc.
 \\\\
 Para concluir, decir que el código y esta documentación estarán disponibles en Github por si son de utilidad para alguien. La dirección es \url{https://github.com/segura2010/QAP-GeneticSolver-IC} y estará disponible pocos días después de la entrega de la práctica.
 
 \iffalse
 Para el formulario:
 
+Selección Aleatoria
+
+Intercambio de gen aleatorio (Como se explica en la Documentación)
+
+Búsqueda Local
+
+El número de generaciones indicado (100000000000000) es el que se ha usado en el código, de forma que la condición de parada real era el tiempo. Cuando llevaba demasiado tiempo simplemente paraba la ejecución.
+
+Para la selección se ha aplicado la indicada en la documentación. No estoy del todo seguro que sea una de las que aparece por defecto en este formulario.
 
 \fi
 

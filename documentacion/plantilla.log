@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.4)  24 JAN 2016 14:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.4)  28 JAN 2016 19:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -885,7 +885,11 @@ Now handling font encoding PD1 ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(./plantilla.aux)
+(./plantilla.aux
+
+LaTeX Warning: Label `resultados_algunas_bd' multiply defined.
+
+)
 \openout1 = `plantilla.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
@@ -905,8 +909,7 @@ LaTeX Font Info:    ... okay on input line 111.
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
 (lastpage)             ! on input line 111.
-
-(/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
+ (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count135
 \scratchdimen=\dimen176
@@ -1003,56 +1006,200 @@ Underfull \hbox (badness 10000) in paragraph at lines 157--162
 
  []
 
-[3] <img/crossover_ox.png, id=104, 259.97125pt x 72.27pt>
-File: img/crossover_ox.png Graphic file (type png)
+[3] <img/crossover_ox.jpg, id=104, 856.19875pt x 554.07pt>
+File: img/crossover_ox.jpg Graphic file (type jpg)
 
-<use img/crossover_ox.png>
-Package pdftex.def Info: img/crossover_ox.png used on input line 165.
-(pdftex.def)             Requested size: 220.8258pt x 61.38786pt.
+<use img/crossover_ox.jpg>
+Package pdftex.def Info: img/crossover_ox.jpg used on input line 165.
+(pdftex.def)             Requested size: 220.8258pt x 142.89655pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 176--179
 
  []
 
-[4 <./img/crossover_ox.png>]
+[4 <./img/crossover_ox.jpg>]
 PGFPlots: reading {../resultados_1000_dat.txt}
 PGFPlots: reading {../resultados_1000_dat.txt}
 PGFPlots: reading {../resultados_1000_dat.txt}
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--275
+
+LaTeX Warning: Reference `' on page 5 undefined on input line 278.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 272--279
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 272--279
 
  []
 
 [5]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 279.
+Underfull \hbox (badness 10000) in paragraph at lines 296--299
 
- (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+ []
+
+[6]
+./plantilla.tex:301: Misplaced \crcr.
+\endarray ->\crcr 
+                  \egroup \egroup \@arrayright \gdef \@preamble {}
+l.301 \end{tabular}
+                   
+? s
+OK, entering \scrollmode...
+./plantilla.tex:301: Too many }'s.
+\endarray ->\crcr \egroup 
+                          \egroup \@arrayright \gdef \@preamble {}
+l.301 \end{tabular}
+                   
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+./plantilla.tex:301: Too many }'s.
+\endarray ->\crcr \egroup \egroup 
+                                  \@arrayright \gdef \@preamble {}
+l.301 \end{tabular}
+                   
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+./plantilla.tex:301: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.301 \end{tabular}
+                   
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+./plantilla.tex:301: LaTeX Error: \begin{document} ended by \end{tabular}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.301 \end{tabular}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+./plantilla.tex:301: Missing $ inserted.
+<inserted text> 
+                $
+l.301 \end{tabular}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./plantilla.tex:301: Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.301 \end{tabular}
+                   
+Things are pretty mixed up, but I think the worst is over.
+
+./plantilla.tex:302: Too many }'s.
+\@endfloatbox ...pagefalse \outer@nobreak \egroup 
+                                                  \color@endbox 
+l.302 \end{table}
+                 
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+./plantilla.tex:302: Extra \endgroup.
+\color@endgroup ->\endgraf \endgroup 
+                                     
+l.302 \end{table}
+                 
+Things are pretty mixed up, but I think the worst is over.
+
+./plantilla.tex:302: Too many }'s.
+\color@endbox ->\color@endgroup \egroup 
+                                        
+l.302 \end{table}
+                 
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+./plantilla.tex:302: LaTeX Error: \begin{document} ended by \end{table}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.302 \end{table}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+./plantilla.tex:302: Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.302 \end{table}
+                 
+Things are pretty mixed up, but I think the worst is over.
+
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 315.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 277--280
+Underfull \hbox (badness 10000) in paragraph at lines 307--316
 
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 307--316
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 307--316
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 307--316
+
+ []
+
+[7] 
 AED: lastpage setting LastPage
-[6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 289.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 289.
+[8]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 334.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 334.
  (./plantilla.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 289.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 289.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 334.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 334.
 Package rerunfilecheck Info: File `plantilla.out' has not changed.
 (rerunfilecheck)             Checksum: BEFE973C174D884F657D20A6856C1132;1015.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 289.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 334.
  ) 
 Here is how much of TeX's memory you used:
- 27222 strings out of 493089
- 650217 string characters out of 6134843
- 925209 words of memory out of 5000000
- 30232 multiletter control sequences out of 15000+600000
+ 27226 strings out of 493089
+ 650238 string characters out of 6134843
+ 927209 words of memory out of 5000000
+ 30233 multiletter control sequences out of 15000+600000
  9063 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,19n,103p,910b,2250s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,19n,103p,1490b,2250s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
 xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/tex
@@ -1065,10 +1212,10 @@ ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive
 exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2015/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015/texm
 f-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on plantilla.pdf (6 pages, 149142 bytes).
+Output written on plantilla.pdf (8 pages, 205979 bytes).
 PDF statistics:
- 178 PDF objects out of 1000 (max. 8388607)
- 155 compressed objects within 2 object streams
- 27 named destinations out of 1000 (max. 500000)
+ 189 PDF objects out of 1000 (max. 8388607)
+ 165 compressed objects within 2 object streams
+ 30 named destinations out of 1000 (max. 500000)
  130 words of extra memory for PDF output out of 10000 (max. 10000000)
 

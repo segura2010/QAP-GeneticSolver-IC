@@ -43,7 +43,7 @@ int main(int argc, char * argv[])
 	//cout << "Starting " << argv[1] << " \n";
 
 	int tamPob = 50, generations = 100000000000000;
-	double mutProb = 0.3;
+	double mutProb = 0.7;
 	GeneticSolver solver(tamPob, mutProb, argv[1]);
 
 	/*
@@ -56,7 +56,7 @@ int main(int argc, char * argv[])
 	
 
 	/*
-	solver.baldwinianSolve(generations, 1000);
+	solver.baldwinianSolve(generations, 5000);
 	int baldSolution = solver.getBestSolutionFitness();
 	cout << "Baldwinian GA: " << endl;
 	printSolution( solver.getBestSolution() );
@@ -64,11 +64,13 @@ int main(int argc, char * argv[])
 	*/
 	
 	
-	solver.lamarckianSolve(generations, 200000);
+	
+	solver.lamarckianSolve(generations, 1000000);
 	int lamarkSolution = solver.getBestSolutionFitness();
 	cout << "Lamarckian GA: " << endl;
 	printSolution( solver.getBestSolution() );
 	cout << "Fitness: " << solver.getBestSolutionFitness() << endl;
+	
 	
 
 	//cout << simpleSolution << " " << baldSolution << " " << lamarkSolution << endl;
